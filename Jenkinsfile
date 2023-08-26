@@ -9,7 +9,7 @@ pipeline{
             steps{
                 script{
                     echo "stage of building the artifact"
-                    sh "mvn build"
+                    sh "mvn package"
                 }
             }
         }
