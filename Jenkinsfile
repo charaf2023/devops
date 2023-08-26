@@ -6,8 +6,10 @@ pipeline{
     }
     stages{
         stage("inti"){
-            script{
-                gv = load "script.groovy"
+            steps{
+                script{
+                                gv = load "script.groovy"
+                            }
             }
         }
         stage("building the artifact"){
