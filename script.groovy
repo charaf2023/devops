@@ -4,11 +4,11 @@ def buildJar() {
 } 
 
 def buildImage() {
-    echo "building the docker image..."
-    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-        sh 'docker build -t nanajanashia/demo-app:jma-2.0 .'
+    echo "stage of building docker image"
+    withCredentials([usernamePassword(credentialsId:'docker-hub-credentials	',passwordVariable:'PASS',usernameVariable:'USER')]){
+        sh "docker build -t charaf2023/java-maven-app:1.1 ."
         sh "echo $PASS | docker login -u $USER --password-stdin"
-        sh 'docker push nanajanashia/demo-app:jma-2.0'
+        sh "docker push charaf2023/java-maven-app:1.1"
     }
 } 
 
