@@ -14,12 +14,22 @@ pipeline {
         }
         stage("build jar") {
             steps {
+                when{
+                    expression{
+                        BRANCH_NAME== 'master'
+                    }
+                }
                 script {
                     echo "building jar"
                 }
             }
         }
         stage("build image") {
+        when{
+                            expression{
+                                BRANCH_NAME== 'master'
+                            }
+                        }
             steps {
                 script {
                     echo "building image"
@@ -28,6 +38,11 @@ pipeline {
         }
         stage("deploy") {
             steps {
+            when{
+                                expression{
+                                    BRANCH_NAME== 'master'
+                                }
+                            }
                 script {
                     echo "deploying"
                 }
