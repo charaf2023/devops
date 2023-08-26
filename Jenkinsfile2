@@ -1,0 +1,52 @@
+def gv
+pipeline {
+    agent any
+    tools{
+        maven 'maven-3.9.4'
+    }
+    stages {
+        stage("test") {
+            steps {
+                script {
+                    echo "testing jar"
+                }
+            }
+        }
+        stage("build jar") {
+            steps {
+                when{
+                    expression{
+                        BRANCH_NAME== 'master'
+                    }
+                }
+                script {
+                    echo "building jar"
+                }
+            }
+        }
+        stage("build image") {
+        when{
+                            expression{
+                                BRANCH_NAME== 'master'
+                            }
+                        }
+            steps {
+                script {
+                    echo "building image"
+                }
+            }
+        }
+        stage("deploy") {
+            steps {
+            when{
+                                expression{
+                                    BRANCH_NAME== 'master'
+                                }
+                            }
+                script {
+                    echo "deploying"
+                }
+            }
+        }
+    }
+}
