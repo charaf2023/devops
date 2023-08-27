@@ -25,9 +25,21 @@ pipeline {
         stage("building docker image") {
             steps {
                 script {
-                    buildImage 'charaf2023/java-maven-app:1.4'
+                    buildImage 'charaf2023/java-maven-app:tagname'
+                }
+            }
+        }
+        stage("login") {
+            steps {
+                script {
                     dockerLogin()
-                    dockerPush 'charaf2023/java-maven-app:1.4'
+                }
+            }
+        }
+        stage("push docker image") {
+            steps {
+                script {
+                    dockerPush 'charaf2023/java-maven-app:tagname'
                 }
             }
         }
