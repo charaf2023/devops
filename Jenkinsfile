@@ -25,7 +25,7 @@ pipeline {
         stage("building docker image") {
             steps {
                 script {
-                    buildImage()
+                    buildImage("charaf2023/java-maven-app:1.3")
                 }
             }
         }
