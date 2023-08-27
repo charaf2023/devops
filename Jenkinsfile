@@ -32,7 +32,7 @@ pipeline {
         stage("login") {
             steps {
                 script {
-                    dockerLogin()
+                    dockerLogin ()
                 }
             }
         }
