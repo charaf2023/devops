@@ -29,6 +29,20 @@ pipeline {
                 }
             }
         }
+        stage("Login to artifact REPO") {
+            steps {
+                script {
+                    dockerLogin("docker-hub-credentials")
+                }
+            }
+        }
+        stage("pushing docker image") {
+            steps {
+                script {
+                    pushImage("charaf2023/java-maven-app:1.3")
+                }
+            }
+        }
         stage("deploying"){
             steps{
                 script{
