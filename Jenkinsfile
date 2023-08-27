@@ -27,7 +27,7 @@ pipeline {
                 script {
                     buildImage 'charaf2023/java-maven-app:1.4'
                     dockerLogin 'docker-hub-credentials'
-                    pushImage 'charaf2023/java-maven-app:1.4'
+                    dockerPush 'charaf2023/java-maven-app:1.4'
                 }
             }
         }
