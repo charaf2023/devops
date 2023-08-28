@@ -36,7 +36,7 @@ pipeline {
         stage("building docker image") {
             steps {
                 script {
-                    buildImage (${IMAGE_NAME})
+                    buildImage ("${IMAGE_NAME}")
                 }
             }
         }
@@ -50,7 +50,7 @@ pipeline {
         stage("push docker image") {
             steps {
                 script {
-                    dockerPush (${IMAGE_NAME})
+                    dockerPush ("${IMAGE_NAME}")
                 }
             }
         }
