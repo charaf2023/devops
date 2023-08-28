@@ -65,7 +65,7 @@ pipeline {
         stage("committing to REPO") {
             steps {
                 script {
-                    pushToGithub 'github.com/charaf2023/devops.git'
+                    pushToGithub 'devops'
                 }
             }
         }
