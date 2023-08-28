@@ -1,3 +1,6 @@
+#!/usr/bin/env groovy
+
+@Library('jenkins-shared-library')
 def gv
 pipeline {
     agent any
@@ -8,6 +11,7 @@ pipeline {
         stage("init") {
             steps {
                 script {
+
                     gv = load "script.groovy"
                 }
             }
@@ -15,19 +19,32 @@ pipeline {
         stage("building the artifact") {
             steps {
                 script {
-                    echo "building jar"
-                    gv.buildJar()
+                    buildJar()
                 }
             }
         }
         stage("building docker image") {
             steps {
                 script {
-                    echo "building image"
-                    gv.buildImage()
+                    buildImage 'charaf2023/java-maven-app:tagname'
                 }
             }
         }
+        stage("login") {
+            steps {
+                script {
+                    dockerLogin ()
+                }
+            }
+        }
+        stage("push docker image") {
+            steps {
+                script {
+                    dockerPush 'charaf2023/java-maven-app:tagname'
+                }
+            }
+        }
+
         stage("deploying"){
             steps{
                 script{
