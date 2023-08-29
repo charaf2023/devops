@@ -57,18 +57,21 @@ pipeline {
                 }
             }
         }
-
-        stage("deploying"){
-            steps{
-                script{
-                    gv.deployApp()
-                }
-            }
-        }
         stage("committing to REPO") {
             steps {
                 script {
                     pushToGithub ("${env.TOKEN}")
+                }
+            }
+        }
+        stage("deploying to EC2"){
+            steps{
+                script{
+                    echo 'deploying to ec2'
+                    def cmd="docker run -d -p3000:8080 ${IMAGE_NAME}"
+                    sshagent(['ec2-server-key-docker-server']) {
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@15.237.191.53 ${cmd}"
+                    }
                 }
             }
         }
