@@ -7,6 +7,9 @@ pipeline {
     tools{
         maven 'maven-3.9.4'
     }
+    environment{
+        TOKEN=credentials('github-token')
+    }
     stages {
         stage("incrementing the version") {
             steps {
@@ -65,7 +68,7 @@ pipeline {
         stage("committing to REPO") {
             steps {
                 script {
-                    pushToGithub 'devops'
+                    pushToGithub ("${env.TOKEN}")
                 }
             }
         }
