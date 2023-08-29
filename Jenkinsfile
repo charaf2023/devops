@@ -70,8 +70,8 @@ pipeline {
                     echo 'deploying to ec2'
                     def cmd="bash ./docker-server-cmds.sh ${IMAGE_NAME}"
                      sshagent(['ec2-server-key-docker-server']) {
-                     sh "scp docker-compose.yaml 15.237.191.53:/home/ec2-user"
-                     sh "scp docker-server-cmds.sh 15.237.191.53:/home/ec2-user"
+                     sh "scp docker-compose.yaml ec2-user@15.237.191.53:/home/ec2-user"
+                     sh "scp docker-server-cmds.sh ec2-user@15.237.191.53:/home/ec2-user"
                      sh "ssh -o StrictHostKeyChecking=no ec2-user@15.237.191.53 ${cmd}"
                      }
                 }
