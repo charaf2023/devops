@@ -57,7 +57,13 @@ pipeline {
                 }
             }
         }
-
+        stage("committing to REPO") {
+            steps {
+                script {
+                    pushToGithub ("${env.TOKEN}")
+                }
+            }
+        }
         stage("deploying"){
             steps{
                 script{
@@ -69,12 +75,6 @@ pipeline {
                 }
             }
         }
-        stage("committing to REPO") {
-            steps {
-                script {
-                    pushToGithub ("${env.TOKEN}")
-                }
-            }
-        }
+
     }
 }
